@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>صيدلية أماني الحرية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--surface:#fff;--ink:#2b1215;--muted:#7a5a5e;--brand:#c8102e;--brand-ink:#fff;--line:#f0cfd3;--accent:#f4a6ae;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0d0f;--surface:#261418;--ink:#fbeaec;--muted:#d1a8ad;--brand:#ff5a6e;--brand-ink:#2b0509;--line:#4a2a2f;--accent:#ff8d9a}}
+:root[data-theme="dark"]{--bg:#1a0d0f;--surface:#261418;--ink:#fbeaec;--muted:#d1a8ad;--brand:#ff5a6e;--brand-ink:#2b0509;--line:#4a2a2f;--accent:#ff8d9a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Cairo",Tahoma,Arial,sans-serif;line-height:1.8}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.hero{padding:40px 0 28px;text-align:center}
+.cross{width:72px;height:72px;margin:0 auto 18px;position:relative}
+.cross:before,.cross:after{content:"";position:absolute;background:var(--brand);border-radius:6px}
+.cross:before{left:26px;top:0;width:20px;height:72px}
+.cross:after{top:26px;left:0;height:20px;width:72px}
+h1{font-size:2.4rem;font-weight:800;margin:0 0 4px;line-height:1.3}
+.tag{color:var(--muted);margin:0 0 18px}
+.status{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-weight:600;font-size:.95rem}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.status.open .dot{background:#2faa6b}
+.status.closed .dot{background:#d0584e}
+.cta{display:block;margin:26px auto 12px;max-width:420px;padding:16px 24px;background:var(--brand);color:var(--brand-ink);font-size:1.25rem;font-weight:800;text-align:center;text-decoration:none;border-radius:14px}
+.cta:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.sub{text-align:center;color:var(--muted);font-size:.9rem;margin:0}
+button.btn{font:inherit;cursor:pointer}
+.callbox{margin:14px auto 0;max-width:420px;padding:16px;border:2px solid var(--brand);border-radius:14px;background:var(--surface);display:flex;flex-direction:column;align-items:center;gap:6px}
+.callbox[hidden]{display:none}
+.callbox span{color:var(--muted);font-weight:600}
+.callbox strong{font-size:1.9rem;letter-spacing:1px;color:var(--brand)}
+.cta2{padding:10px 28px;background:var(--brand);color:var(--brand-ink);font-weight:800;border-radius:999px;text-decoration:none}
+.actions{flex-wrap:wrap;display:flex;gap:10px;margin:22px 0 0}
+.btn{flex:1 1 40%;text-align:center;padding:12px 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:600;border-radius:12px}
+section{padding:26px 0 0}
+h2{font-size:1.3rem;margin:0 0 12px;font-weight:800}
+dl{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 18px}
+.row{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+dt{flex:0 0 96px;color:var(--muted);font-weight:600}
+dd{margin:0;flex:1}
+ul.svc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ul.svc li{background:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--brand);border-radius:10px;padding:10px 14px;font-weight:600}
+.note{margin:26px 0 0;padding:14px 18px;border-radius:12px;background:var(--surface);border:1px dashed var(--accent);color:var(--muted);font-size:.9rem}
+.meds{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.med{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.med svg{width:84px;height:84px;display:block;margin:0 auto 6px}
+.med .s{fill:var(--bg);stroke:var(--brand);stroke-width:2.5;stroke-linejoin:round}
+.med .f{fill:var(--brand)}
+.med .a{fill:var(--accent)}
+.med h3{margin:0;font-size:1rem;font-weight:800}
+.med p{margin:0;color:var(--muted);font-size:.85rem;line-height:1.5}
+.med .price{display:block;margin-top:6px;font-weight:800;font-size:1.05rem;color:var(--brand)}
+.med .add{margin-top:8px;padding:6px 18px;border:0;border-radius:999px;background:var(--brand);color:var(--brand-ink);font:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+.med .add:focus-visible,.bar:focus-visible,.x:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.search{width:100%;margin:0 0 14px;padding:13px 16px;font:inherit;font-size:1rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.search:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.empty{display:none;text-align:center;color:var(--muted);padding:18px 8px}
+.empty a{color:var(--brand);font-weight:700}
+.med[hidden]{display:none}
+.tabs{display:flex;gap:8px;margin:0 0 12px}
+.tab{flex:1;padding:10px 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;border-radius:12px;cursor:pointer}
+.tab.on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.tab:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.rxinfo{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+.rx{display:inline-block;margin-top:4px;padding:1px 10px;border-radius:999px;background:var(--accent);color:#5a0a17;font-size:.75rem;font-weight:800}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:696px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border:0;border-radius:14px;background:var(--brand);color:var(--brand-ink);font:inherit;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:5}
+.bar[hidden],.ov[hidden]{display:none}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10;display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:720px;max-height:88%;overflow-y:auto;background:var(--bg);border-radius:18px 18px 0 0;padding:18px 20px calc(20px + env(safe-area-inset-bottom,0px))}
+.sh{display:flex;justify-content:space-between;align-items:center}
+.sh h2{margin:0}
+.x{border:0;background:var(--surface);color:var(--ink);width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;border:1px solid var(--line)}
+.ci{list-style:none;margin:12px 0;padding:0}
+.ci li{display:block;padding:10px 0;border-bottom:1px solid var(--line)}
+.ci .r{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+.ci .ql{color:var(--muted);font-weight:600}
+.rxn{display:none;background:var(--surface);border:1px dashed var(--brand);border-radius:12px;padding:10px 14px;margin:10px 0;font-weight:600;font-size:.92rem}
+.btn.book{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.ci .nm{flex:1;font-weight:700}
+.ci .nm small{display:block;color:var(--muted);font-weight:400}
+.q{display:flex;align-items:center;gap:8px}
+.q button{width:32px;height:32px;border-radius:50%;border:1px solid var(--brand);background:var(--surface);color:var(--brand);font-size:1.1rem;font-weight:800;cursor:pointer}
+.lab{display:block;margin:14px 0 6px;font-weight:700}
+.sum{margin:14px 0}
+.sum div{display:flex;justify-content:space-between;padding:4px 0}
+.sum .t{font-weight:800;font-size:1.2rem;border-top:1px solid var(--line);margin-top:6px;padding-top:10px;color:var(--brand)}
+.hint{color:var(--brand);font-weight:700;min-height:1.5em;margin:0;text-align:center}
+.cta[aria-disabled="true"]{opacity:.5;pointer-events:none}
+body{padding-bottom:90px}
+footer{padding:30px 0 40px;text-align:center;color:var(--muted);font-size:.85rem}
+@media (max-width:480px){.med svg{width:68px;height:68px}h1{font-size:1.9rem}ul.svc{grid-template-columns:1fr}dt{flex-basis:78px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="cross" aria-hidden="true"></div>
+    <h1>صيدلية أماني الحرية</h1>
+    <p class="tag">دواؤك لحد باب بيتك، وصيدلي بيراجع كل طلب</p>
+    <span class="status" id="status"><span class="dot"></span><span id="statusText">بنتأكد من المواعيد...</span></span>
+    <a class="cta" href="#meds">اطلب دواءك</a>
+    <p class="sub">اختار أدويتك، ضيفها للسلة، وأكّد الأوردر · الدفع عند الاستلام</p>
+    <div class="actions">
+      <button class="btn" id="callBtn" type="button" aria-expanded="false" aria-controls="callBox">اتصل بنا</button>
+      <a class="btn book" href="https://youssefbarmaga.app.n8n.cloud/form/amany-elhorreya-booking">احجز معنا</a>
+      <a class="btn" href="https://wa.me/201289686994">واتساب</a>
+      <a class="btn" href="https://maps.google.com/?q=6+شارع+صديق+شيبوب+سيدي+بشر+الإسكندرية">الموقع</a>
+    </div>
+    <div class="callbox" id="callBox" hidden>
+      <span>رقم الصيدلية</span>
+      <strong dir="ltr">01289686994</strong>
+      <a class="cta2" href="tel:01289686994">اتصل الآن</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>معلومات الصيدلية</h2>
+    <dl>
+      <div class="row"><dt>العنوان</dt><dd>6 شارع صديق شيبوب، فوق نفق سيدي بشر، العمارة اللي جنب مكتبة زوزو</dd></div>
+      <div class="row"><dt>التليفون</dt><dd dir="ltr" style="text-align:right">012 8968 6994</dd></div>
+      <div class="row"><dt>المواعيد</dt><dd>يومياً من 9 صباحاً حتى 11 مساءً (مؤقت)</dd></div>
+      <div class="row"><dt>التوصيل</dt><dd>داخل الإسكندرية: 30 جنيه ثابت، ومنطقة سيدي بشر: 15 جنيه</dd></div>
+      <div class="row"><dt>الدفع</dt><dd>عند الاستلام</dd></div>
+      <div class="row"><dt>زيارة منزلية</dt><dd><a href="https://youssefbarmaga.app.n8n.cloud/form/amany-elhorreya-booking" style="color:var(--brand);font-weight:700">احجز معنا</a></dd></div>
+    </dl>
+  </section>
+
+  <section>
+    <h2>خدماتنا</h2>
+    <ul class="svc">
+      <li>توصيل الأدوية</li>
+      <li>الأدوية المزمنة</li>
+      <li>قياس الضغط والسكر</li>
+      <li>مستلزمات الأطفال</li>
+      <li>العناية بالبشرة</li>
+      <li>فيتامينات ومكملات</li>
+    </ul>
+  </section>
+
+  <section id="meds">
+    <h2>المنتجات المتاحة</h2>
+    <div class="tabs" role="tablist"><button type="button" class="tab on" data-cat="med" role="tab" aria-selected="true">الأدوية</button><button type="button" class="tab" data-cat="sup" role="tab" aria-selected="false">فيتامينات ومكملات</button></div>
+    <p class="rxinfo" id="rxinfo">كل الأدوية بتتطلب صورة الروشتة عند الطلب. الفيتامينات والمكملات من غير روشتة.</p>
+    <input class="search" id="q" type="search" placeholder="ابحث باسم الدواء أو بالاستخدام (مثلاً: حساسية، بنادول، صداع)" aria-label="ابحث عن دواء" autocomplete="off">
+    <p class="empty" id="empty">مفيش نتيجة لبحثك. لو الدواء مش في القائمة، <a href="https://youssefbarmaga.app.n8n.cloud/form/amany-elhorreya-order">اطلبه من هنا</a> وهنتأكد من توفره.</p>
+    <ul class="meds">
+      <li class="med" data-cat="med" data-price="65">
+        <svg viewBox="0 0 80 80" role="img" aria-label="علبة دواء"><rect class="s" x="12" y="22" width="56" height="40" rx="6"/><rect class="f" x="12" y="30" width="56" height="8"/><rect class="a" x="36" y="44" width="8" height="14" rx="1"/><rect class="a" x="33" y="47" width="14" height="8" rx="1"/></svg>
+        <h3 dir="ltr">Panadol Advance 500mg</h3><p>مسكن وخافض حرارة</p><span class="price">65 – 92 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="55">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Panadol Extra</h3><p>صداع وآلام بسيطة</p><span class="price">حوالي 55 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="86">
+        <svg viewBox="0 0 80 80" role="img" aria-label="علبة دواء"><rect class="s" x="12" y="22" width="56" height="40" rx="6"/><rect class="f" x="12" y="30" width="56" height="8"/><rect class="a" x="36" y="44" width="8" height="14" rx="1"/><rect class="a" x="33" y="47" width="14" height="8" rx="1"/></svg>
+        <h3 dir="ltr">Cataflam 50mg</h3><p>مسكن ومضاد التهاب</p><span class="price">حوالي 86 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="40">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Cetafen</h3><p>مسكن وخافض حرارة</p><span class="price">حوالي 40 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="38">
+        <svg viewBox="0 0 80 80" role="img" aria-label="بخاخ أنف"><rect class="f" x="34" y="6" width="12" height="10" rx="2"/><rect class="s" x="30" y="16" width="20" height="10" rx="2"/><rect class="s" x="24" y="26" width="32" height="46" rx="8"/><rect class="a" x="30" y="40" width="20" height="14" rx="2"/></svg>
+        <h3 dir="ltr">Otrivin</h3><p>انسداد الأنف</p><span class="price">حوالي 38 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="35">
+        <svg viewBox="0 0 80 80" role="img" aria-label="محلول للأنف"><rect class="f" x="32" y="8" width="16" height="12" rx="2"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><path class="a" d="M40 32c6 8 8 12 8 16a8 8 0 0 1-16 0c0-4 2-8 8-16z"/></svg>
+        <h3 dir="ltr">Otrisalin</h3><p>محلول ملحي للأنف</p><span class="price">حوالي 35 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="65">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Zyrtec</h3><p>حساسية ورشح</p><span class="price">حوالي 65 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="55">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Claritin</h3><p>حساسية</p><span class="price">حوالي 55 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="70">
+        <svg viewBox="0 0 80 80" role="img" aria-label="علبة دواء"><rect class="s" x="12" y="22" width="56" height="40" rx="6"/><rect class="f" x="12" y="30" width="56" height="8"/><rect class="a" x="36" y="44" width="8" height="14" rx="1"/><rect class="a" x="33" y="47" width="14" height="8" rx="1"/></svg>
+        <h3 dir="ltr">Telfast 120mg</h3><p>حساسية</p><span class="price">حوالي 70 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="48">
+        <svg viewBox="0 0 80 80" role="img" aria-label="علبة دواء"><rect class="s" x="12" y="22" width="56" height="40" rx="6"/><rect class="f" x="12" y="30" width="56" height="8"/><rect class="a" x="36" y="44" width="8" height="14" rx="1"/><rect class="a" x="33" y="47" width="14" height="8" rx="1"/></svg>
+        <h3 dir="ltr">Dramamine/Dramenex 50mg</h3><p>دوار وغثيان</p><span class="price">حوالي 48 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="78">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Brufen 400 mg</h3><p>مسكن ومضاد التهاب · 30 قرص</p><span class="price">78 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="66">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Voltaren 50 mg</h3><p>مسكن لآلام المفاصل والعضلات · 20 قرص</p><span class="price">66 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="53">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Advil 200 mg</h3><p>مسكن وخافض حرارة · 24 قرص</p><span class="price">53 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="117">
+        <svg viewBox="0 0 80 80" role="img" aria-label="علبة دواء"><rect class="s" x="12" y="22" width="56" height="40" rx="6"/><rect class="f" x="12" y="30" width="56" height="8"/><rect class="a" x="36" y="44" width="8" height="14" rx="1"/><rect class="a" x="33" y="47" width="14" height="8" rx="1"/></svg>
+        <h3 dir="ltr">Augmentin 625 mg</h3><p>مضاد حيوي</p><span class="price">117 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="64.90">
+        <svg viewBox="0 0 80 80" role="img" aria-label="كبسولات"><g transform="rotate(-40 40 40)"><rect class="s" x="12" y="28" width="56" height="24" rx="12"/><path class="f" d="M40 28h16a12 12 0 0 1 0 24H40z"/></g></svg>
+        <h3 dir="ltr">Amoxil 500 mg</h3><p>مضاد حيوي · 20 كبسولة</p><span class="price">64.90 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="54">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Flagyl 500 mg</h3><p>مضاد حيوي وللطفيليات · 20 قرص</p><span class="price">54 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="41">
+        <svg viewBox="0 0 80 80" role="img" aria-label="كبسولات"><g transform="rotate(-40 40 40)"><rect class="s" x="12" y="28" width="56" height="24" rx="12"/><path class="f" d="M40 28h16a12 12 0 0 1 0 24H40z"/></g></svg>
+        <h3 dir="ltr">Antinal 200 mg</h3><p>للإسهال والتهابات الأمعاء · 24 كبسولة</p><span class="price">41 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="65">
+        <svg viewBox="0 0 80 80" role="img" aria-label="علبة دواء"><rect class="s" x="12" y="22" width="56" height="40" rx="6"/><rect class="f" x="12" y="30" width="56" height="8"/><rect class="a" x="36" y="44" width="8" height="14" rx="1"/><rect class="a" x="33" y="47" width="14" height="8" rx="1"/></svg>
+        <h3 dir="ltr">Strepsils Original</h3><p>أقراص مص لالتهاب الحلق · 24 قطعة</p><span class="price">65 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="53">
+        <svg viewBox="0 0 80 80" role="img" aria-label="كبسولات"><g transform="rotate(-40 40 40)"><rect class="s" x="12" y="28" width="56" height="24" rx="12"/><path class="f" d="M40 28h16a12 12 0 0 1 0 24H40z"/></g></svg>
+        <h3 dir="ltr">Mucotec 150 mg</h3><p>مذيب للبلغم · 20 كبسولة</p><span class="price">53 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="34">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Mucosolvan 30 mg</h3><p>مذيب للبلغم · 10 أقراص</p><span class="price">34 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="59">
+        <svg viewBox="0 0 80 80" role="img" aria-label="زجاجة شراب"><rect class="f" x="32" y="10" width="16" height="10" rx="2"/><path class="s" d="M30 20h20v8l8 8v30a6 6 0 0 1-6 6H28a6 6 0 0 1-6-6V36l8-8z"/><rect class="a" x="28" y="42" width="24" height="16" rx="2"/></svg>
+        <h3 dir="ltr">Prospan Helix</h3><p>شراب أعشاب للكحة · 100 مل</p><span class="price">59 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="109">
+        <svg viewBox="0 0 80 80" role="img" aria-label="بخاخ استنشاق"><rect class="s" x="20" y="10" width="26" height="40" rx="6"/><path class="s" d="M20 44h46a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6z"/><rect class="a" x="28" y="20" width="10" height="16" rx="2"/></svg>
+        <h3 dir="ltr">Ventolin Evohaler 100 mcg</h3><p>بخاخ استنشاق للربو وضيق التنفس</p><span class="price">109 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="65">
+        <svg viewBox="0 0 80 80" role="img" aria-label="زجاجة شراب"><rect class="f" x="32" y="10" width="16" height="10" rx="2"/><path class="s" d="M30 20h20v8l8 8v30a6 6 0 0 1-6 6H28a6 6 0 0 1-6-6V36l8-8z"/><rect class="a" x="28" y="42" width="24" height="16" rx="2"/></svg>
+        <h3 dir="ltr">Gaviscon Advance</h3><p>للحموضة والارتجاع · 150 مل</p><span class="price">65 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="45.20">
+        <svg viewBox="0 0 80 80" role="img" aria-label="كبسولات"><g transform="rotate(-40 40 40)"><rect class="s" x="12" y="28" width="56" height="24" rx="12"/><path class="f" d="M40 28h16a12 12 0 0 1 0 24H40z"/></g></svg>
+        <h3 dir="ltr">Omepral 20 mg</h3><p>لحموضة وقرحة المعدة · 14 كبسولة</p><span class="price">45.20 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="43.50">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Buscopan 10 mg</h3><p>للمغص والتقلصات · 20 قرص</p><span class="price">43.50 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="37.10">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Motilium 10 mg</h3><p>للغثيان والانتفاخ · 30 قرص</p><span class="price">37.10 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="41">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Neurobion</h3><p>فيتامينات للأعصاب · 20 قرص</p><span class="price">41 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="255">
+        <svg viewBox="0 0 80 80" role="img" aria-label="كبسولات"><g transform="rotate(-40 40 40)"><rect class="s" x="12" y="28" width="56" height="24" rx="12"/><path class="f" d="M40 28h16a12 12 0 0 1 0 24H40z"/></g></svg>
+        <h3 dir="ltr">Uni Lipoic 600 mg</h3><p>مكمل لدعم الأعصاب · 30 كبسولة</p><span class="price">255 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="med" data-price="144">
+        <svg viewBox="0 0 80 80" role="img" aria-label="شريط أقراص"><rect class="s" x="14" y="12" width="52" height="56" rx="8"/><circle class="a" cx="30" cy="28" r="7"/><circle class="a" cx="50" cy="28" r="7"/><circle class="a" cx="30" cy="52" r="7"/><circle class="a" cx="50" cy="52" r="7"/><rect class="f" x="14" y="38" width="52" height="4"/></svg>
+        <h3 dir="ltr">Mucotec 300 mg</h3><p>مذيب للبلغم · أقراص</p><span class="price">144 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="75" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Limitless Ossofortin D3 2000 IU</h3><p>فيتامين د3 لدعم العظام</p><span class="price">75 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="90" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">C-Zinc</h3><p>فيتامين سي وزنك لدعم المناعة</p><span class="price">90 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="99" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">HPI Folic B12</h3><p>فوليك أسيد وفيتامين ب12</p><span class="price">99 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="250" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Limitless Omega 3 2000mg</h3><p>أوميجا 3 لدعم القلب والمخ</p><span class="price">250 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="164" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Centrum Adult 30 قرص</h3><p>فيتامينات ومعادن متعددة للبالغين</p><span class="price">164 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="169" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">B2R Hemascor Iron</h3><p>مكمل حديد</p><span class="price">169 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="202" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">NutriVille B Complex</h3><p>فيتامينات ب المركبة</p><span class="price">202 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="202" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">NutriVille Woman Multivitamin</h3><p>فيتامينات متعددة للسيدات</p><span class="price">202 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="285" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Limitless Woman Max</h3><p>فيتامينات متعددة للسيدات</p><span class="price">285 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="320" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Centrum Energy</h3><p>فيتامينات للطاقة والنشاط</p><span class="price">320 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="374" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="برطمان مكمل"><rect class="f" x="18" y="12" width="44" height="12" rx="4"/><rect class="s" x="14" y="24" width="52" height="46" rx="10"/><circle class="a" cx="40" cy="47" r="10"/></svg>
+        <h3 dir="ltr">GINIPIN Collagen</h3><p>كولاجين للبشرة والمفاصل</p><span class="price">374 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="270" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Elia D3 + K2</h3><p>فيتامين د3 وك2 للعظام</p><span class="price">270 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="362" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="برطمان مكمل"><rect class="f" x="18" y="12" width="44" height="12" rx="4"/><rect class="s" x="14" y="24" width="52" height="46" rx="10"/><circle class="a" cx="40" cy="47" r="10"/></svg>
+        <h3 dir="ltr">Limitless Man Gummies</h3><p>فيتامينات متعددة للرجال (جمي)</p><span class="price">362 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="255" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="برطمان مكمل"><rect class="f" x="18" y="12" width="44" height="12" rx="4"/><rect class="s" x="14" y="24" width="52" height="46" rx="10"/><circle class="a" cx="40" cy="47" r="10"/></svg>
+        <h3 dir="ltr">Collagify + Vitamin C</h3><p>كولاجين وفيتامين سي</p><span class="price">255 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="212" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">GAMPS Omega 3-6-9</h3><p>أوميجا 3-6-9</p><span class="price">212 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="999" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Now Biotin 5000 mcg</h3><p>بيوتين للشعر والأظافر</p><span class="price">999 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="2739" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Now Magnesium Glycinate</h3><p>ماغنسيوم</p><span class="price">2,739 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="2600" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Doctor's Best Vitamin D3 5000 IU</h3><p>فيتامين د3</p><span class="price">2,600 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="2350" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">California Gold Magnesium</h3><p>ماغنسيوم</p><span class="price">2,350 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+      <li class="med" data-cat="sup" data-price="2700" hidden>
+        <svg viewBox="0 0 80 80" role="img" aria-label="عبوة مكمل"><rect class="f" x="26" y="8" width="28" height="12" rx="3"/><rect class="s" x="22" y="20" width="36" height="52" rx="8"/><rect class="a" x="28" y="34" width="24" height="22" rx="3"/></svg>
+        <h3 dir="ltr">Now Ultra Omega-3</h3><p>أوميجا 3 مركّز</p><span class="price">2,700 جنيه</span><button type="button" class="add">إضافة</button>
+      </li>
+    </ul>
+    <p class="sub" style="margin-top:14px">مش لاقي دواءك؟ <a href="https://youssefbarmaga.app.n8n.cloud/form/amany-elhorreya-order" style="color:var(--brand);font-weight:700">اطلبه من هنا</a></p>
+  </section>
+
+  <p class="note">الأسعار تقريبية ومؤقتة وبتتأكد وقت التأكيد. الطلب أونلاين مش بيغني عن مراجعة الصيدلي. كل الأدوية بتتطلب صورة الروشتة، وأي استفسار عن الجرعات بنجاوب عليه الصيدلي بنفسه.</p>
+</main>
+<footer>صيدلية أماني الحرية &copy; نسخة تجريبية ببيانات مؤقتة</footer>
+<button class="bar" id="bar" type="button" hidden><span id="barCount"></span><span>عرض السلة</span><span id="barTotal"></span></button>
+<div class="ov" id="ov" hidden>
+ <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="sh"><h2 id="cartTitle">سلتك</h2><button class="x" id="close" type="button" aria-label="إغلاق">&#10005;</button></div>
+  <ul class="ci" id="items"></ul>
+  <p class="rxn" id="rxn">في سلتك أدوية، والفورم الجاي هيطلب منك صورة الروشتة (إجباري).</p>
+  <label class="lab" for="area">منطقة التوصيل</label>
+  <select id="area" class="search"><option value="">اختار المنطقة</option><option value="سيدي بشر">سيدي بشر (15 جنيه)</option><option value="باقي الإسكندرية">باقي مناطق الإسكندرية (30 جنيه)</option></select>
+  <div class="sum"><div><span>الأدوية</span><span id="sItems"></span></div><div><span>التوصيل</span><span id="sFee"></span></div><div class="t"><span>الإجمالي</span><span id="sTotal"></span></div></div>
+  <p class="hint" id="hint"></p>
+  <a class="cta" id="checkout" href="#" aria-disabled="true">تأكيد الأوردر</a>
+  <p class="sub"><b>الدفع عند الاستلام.</b> الأسعار تقريبية، والصيدلي بيأكد السعر النهائي وتوفر الأدوية قبل التجهيز</p>
+ </div>
+</div>
+<script>
+(function(){
+  var FORM="https://youssefbarmaga.app.n8n.cloud/form/amany-elhorreya-order",FORM_SUP="https://youssefbarmaga.app.n8n.cloud/form/amany-elhorreya-supplements";
+  var cart={};
+  try{cart=JSON.parse(localStorage.getItem("amanyCart2")||"{}")}catch(e){cart={}}
+  var NOSTRIP=/Strepsils|Prospan|Ventolin|Gaviscon|Otrivin|Otrisalin/;
+  var info={};
+  var $=function(i){return document.getElementById(i)};
+  [].forEach.call(document.querySelectorAll(".med"),function(li){
+    var n=li.querySelector("h3").textContent,sup=li.dataset.cat==="sup";
+    info[n]={p:parseFloat(li.dataset.price),sup:sup,strip:!sup&&!NOSTRIP.test(n)};
+    li.querySelector(".add").addEventListener("click",function(){
+      var c=cart[n]||(cart[n]={b:0,s:0});c.b++;render();
+      var b=this;b.textContent="تمت الإضافة \u2713";setTimeout(function(){b.textContent="إضافة"},900);
+    });
+  });
+  var bar=$("bar"),ov=$("ov"),area=$("area"),chk=$("checkout");
+  function r2(x){return Math.round(x*100)/100}
+  function fmt(x){return r2(x)+" جنيه"}
+  function feeOf(){return area.value==="سيدي بشر"?15:area.value?30:null}
+  function save(){try{localStorage.setItem("amanyCart2",JSON.stringify(cart))}catch(e){}}
+  function row(label,c,key){
+    var r=document.createElement("div");r.className="r";
+    r.innerHTML='<span class="ql"></span><span class="q"><button type="button" aria-label="إنقاص">&minus;</button><b></b><button type="button" aria-label="زيادة">+</button></span>';
+    r.querySelector(".ql").textContent=label;
+    r.querySelector("b").textContent=c[key];
+    var bs=r.querySelectorAll("button");
+    bs[0].onclick=function(){if(c[key]>0)c[key]--;render()};
+    bs[1].onclick=function(){c[key]++;render()};
+    return r;
+  }
+  function render(){
+    Object.keys(cart).forEach(function(k){var c=cart[k];if(!(k in info)||!c||(c.b+c.s)<1)delete cart[k]});
+    save();
+    var names=Object.keys(cart),count=0,sub=0,hasMed=false,parts=[];
+    var ul=$("items");ul.innerHTML="";
+    names.forEach(function(n){
+      var c=cart[n],i=info[n],sp=r2(i.p/4);
+      count+=c.b+c.s;sub+=c.b*i.p+c.s*sp;if(!i.sup)hasMed=true;
+      var li=document.createElement("li");
+      var nm=document.createElement("div");nm.className="nm";nm.textContent=n;
+      var sm=document.createElement("small");
+      sm.textContent=fmt(i.p)+(i.sup?" للعبوة":" للعلبة"+(i.strip?" · "+fmt(sp)+" للشريط":""));
+      nm.appendChild(sm);li.appendChild(nm);
+      li.appendChild(row(i.sup?"عبوة":"علبة",c,"b"));
+      if(i.strip)li.appendChild(row("شريط",c,"s"));
+      ul.appendChild(li);
+      var q=[];
+      if(i.sup){q.push(c.b+" عبوة")}else{if(c.b)q.push(c.b+" علبة");if(c.s)q.push(c.s+" شريط")}
+      parts.push(n+": "+q.join(" + ")+" ("+i.p+" "+(i.sup?"للعبوة":"للعلبة"+(i.strip?"، "+sp+" للشريط":""))+")");
+    });
+    if(!names.length){ul.innerHTML='<li style="color:var(--muted)">السلة فاضية</li>'}
+    $("rxn").style.display=hasMed?"block":"none";
+    var fee=feeOf();
+    $("sItems").textContent=fmt(sub);
+    $("sFee").textContent=fee===null?"اختار المنطقة":fmt(fee);
+    $("sTotal").textContent=fee===null?fmt(sub):fmt(sub+fee);
+    bar.hidden=!count||!ov.hidden;
+    $("barCount").textContent=count+" في السلة";
+    $("barTotal").textContent=fmt(sub);
+    chk.setAttribute("aria-disabled",count>0?"false":"true");
+    chk.href=(hasMed?FORM:FORM_SUP)+"?cart="+encodeURIComponent(parts.join(" | "))+"&itemsTotal="+r2(sub)+"&area="+encodeURIComponent(area.value);
+  }
+  chk.addEventListener("click",function(e){
+    if(!area.value){e.preventDefault();$("hint").textContent="اختار منطقة التوصيل الأول";area.focus()}
+  });
+  area.addEventListener("change",function(){$("hint").textContent="";render()});
+  bar.addEventListener("click",function(){ov.hidden=false;bar.hidden=true;$("close").focus()});
+  function closeIt(){ov.hidden=true;render()}
+  $("close").addEventListener("click",closeIt);
+  ov.addEventListener("click",function(e){if(e.target===ov)closeIt()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!ov.hidden)closeIt()});
+  render();
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById("callBtn"),box=document.getElementById("callBox");
+  b.addEventListener("click",function(){var o=box.hidden;box.hidden=!o;b.setAttribute("aria-expanded",String(o))});
+})();
+</script>
+<script>
+(function(){
+  var q=document.getElementById("q"),empty=document.getElementById("empty");
+  var cards=[].slice.call(document.querySelectorAll(".med"));
+  var tabs=[].slice.call(document.querySelectorAll(".tab"));
+  var cat="med";
+  var alias={"بنادول":"panadol","باناسيتول":"panadol","كتافلام":"cataflam","سيتافين":"cetafen","اوتريفين":"otrivin","اوتريسالين":"otrisalin","زيرتك":"zyrtec","كلاريتين":"claritin","تلفاست":"telfast","دراماميم":"dramamine","درامامين":"dramamine","بروفين":"brufen","فولتارين":"voltaren","ادفيل":"advil","اوجمنتين":"augmentin","اموكسيل":"amoxil","فلاجيل":"flagyl","انتينال":"antinal","ستربسيلز":"strepsils","ميوكوتك":"mucotec","موكوتك":"mucotec","ميوكوسولفان":"mucosolvan","بروسبان":"prospan","فنتولين":"ventolin","جافيسكون":"gaviscon","اوميبرال":"omepral","بوسكوبان":"buscopan","موتيليوم":"motilium","نيوروبيون":"neurobion","ليبويك":"lipoic","سنترم":"centrum","اوميجا":"omega","بيوتين":"biotin","ماجنسيوم":"magnesium","ماغنسيوم":"magnesium","كولاجين":"collagen","نوتريفيل":"nutriville","ليميتليس":"limitless","فوليك":"folic","زنك":"zinc"};
+  function norm(t){return String(t).toLowerCase().replace(/[\u064B-\u0652]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").trim()}
+  cards.forEach(function(c){c._t=norm(c.querySelector("h3").textContent+" "+c.querySelector("p").textContent)});
+  function apply(){
+    var v=norm(q.value),alt=alias[v]||"",shown=0;
+    cards.forEach(function(c){
+      var ok=v?(c._t.indexOf(v)>-1||(alt&&c._t.indexOf(alt)>-1)):c.dataset.cat===cat;
+      c.hidden=!ok;if(ok)shown++;
+    });
+    empty.style.display=shown?"none":"block";
+  }
+  q.addEventListener("input",apply);
+  tabs.forEach(function(t){t.addEventListener("click",function(){
+    cat=t.dataset.cat;q.value="";
+    tabs.forEach(function(x){var on=x===t;x.classList.toggle("on",on);x.setAttribute("aria-selected",String(on))});
+    document.getElementById("rxinfo").style.display=cat==="med"?"block":"none";
+    apply();
+  })});
+  apply();
+})();
+</script>
+<script>
+(function(){
+  var open=9,close=23;
+  var h=new Date().toLocaleString("en-GB",{timeZone:"Africa/Cairo",hour:"numeric",hour12:false});
+  h=parseInt(h,10);
+  var el=document.getElementById("status"),tx=document.getElementById("statusText");
+  if(h>=open&&h<close){el.className="status open";tx.textContent="مفتوحة دلوقتي حتى 11 مساءً"}
+  else{el.className="status closed";tx.textContent="مقفولة دلوقتي، بنفتح 9 صباحاً (الطلبات بتتسجل وبنرد أول ما نفتح)"}
+})();
+</script>
+</body>
+</html>
